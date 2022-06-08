@@ -1,0 +1,11 @@
+*{
+  max-width: 100%;
+}
+
+.App {
+  background-color: #282c34;
+  min-height: 100vh;
+  max-width: 100vw;
+  color: wheat;
+  padding: 2rem;
+}
