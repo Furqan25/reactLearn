@@ -3,9 +3,9 @@ import Link from '../Link/Link';
 
 export default function Nav(props){
     const links = [
-        {title:"Google", url:"Google.com"},
-        {title:"Github",url:"Github.com"},
-        {title:"Linkedin",url:"Linkedin.com"}
+        {title:"Films", url:"Google.com"},
+        {title:"People",url:"Github.com"},
+        {title:"Planets",url:"Linkedin.com"}
     ];
 
     return (

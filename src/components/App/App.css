@@ -9,3 +9,13 @@
   color: wheat;
   padding: 2rem;
 }
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2rem;
+  min-height: 80vh;
+  background-color: #222;
+}
