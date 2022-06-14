@@ -22,12 +22,11 @@ export default function App() {
         return ()=>{
             //clean up function
         }
-    },[terms])
+    },[terms]);
 
     useEffect(()=>{
-        console.log("domgis")
         fetchData();
-    },[])
+    },[]);
 
     async function fetchData(keyword){
         let url = `https://swapi.dev/api/${dataType}`;
@@ -45,8 +44,10 @@ export default function App() {
         <div className='App'>
             <Header company={name} />
             <SearchBar term={terms[0]} addTerm={addTerm} />
-            <SearchHistory terms={terms} />
-            <SearchResults results={results} type={dataType}/>
+            <main className='content'>
+                <SearchHistory terms={terms} />
+                <SearchResults results={results} type={dataType}/>
+            </main>
         </div>
     );
 }
