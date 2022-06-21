@@ -1,18 +1,13 @@
 import './nav.css';
-import Link from '../Link/Link';
+import {Link} from 'react-router-dom';
 
 export default function Nav(props){
-    const links = [
-        {title:"Films", url:"Google.com"},
-        {title:"People",url:"Github.com"},
-        {title:"Planets",url:"Linkedin.com"}
-    ];
 
     return (
-        <nav>
-            {links.map(lnk=>{
-                return <Link link={lnk} key={lnk.title}/>
-            })}  
+        <nav className='mainNav'> 
+            <Link to={"/films"}>Films</Link>
+            <Link to={"/people"}>People</Link>
+            <Link to={"/planets"}>Planets</Link>
         </nav>
-    )
+    );
 }

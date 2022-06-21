@@ -1,0 +1,8 @@
+.mainNav > a {
+  color: cornflowerblue;
+  font-size: 1.6rem;
+  margin: 2rem;
+}
+a.activeLink {
+  color: orangered;
+}

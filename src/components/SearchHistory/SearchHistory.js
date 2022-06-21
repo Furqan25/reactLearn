@@ -8,7 +8,7 @@ export default function SearchHistory(props) {
         return{
             ref: index,
             title: item,
-            txt: null
+            text: null
         };
     });
 
