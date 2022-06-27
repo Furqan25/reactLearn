@@ -1,5 +1,5 @@
 import './main.css';
-import {Routes, Route, useLocation} from 'react-router-dom';
+import {Navigate , Routes, Route, useLocation} from 'react-router-dom';
 import People from "../People/People";
 import Person from "../Person/Person";
 import Planets from "../Planets/Planets";
@@ -32,13 +32,15 @@ export default function Main (props){
             <Routes>
                 <Route path="/films/*" element={<Films/>}/>
 
-                <Route path="/people" element={<People list={people}/>}>
+                <Route path="/people/*" element={<People list={people}/>}>
                     <Route path=":id" element={<Person list={people}/>}/>
                 </Route>
                     
                 <Route path="/planets/*" element={<Planets/>}/>                
 
                 <Route path='/' exact element={<Home/>}/>
+
+                <Route path="*" element={<Navigate to="/" replace={true} />}/>
             </Routes>
         </div>
     );
