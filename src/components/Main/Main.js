@@ -5,11 +5,14 @@ import Person from "../Person/Person";
 import Planets from "../Planets/Planets";
 import Films from "../Films/Films";
 import Home from "../Home/Home";
+import Sub from '../Sub/Sub';
 import { useState, useEffect } from 'react';
 
 export default function Main (props){
     const {pathname} = useLocation();
     const [people,setPeople] = useState([]);
+    let name = ["Kylo","Rey"];
+    let nms = Array.isArray(name) ? name.join(" and ") : name;
 
     useEffect(()=>{
         try{
@@ -38,7 +41,13 @@ export default function Main (props){
                     
                 <Route path="/planets/*" element={<Planets/>}/>                
 
-                <Route path='/' exact element={<Home/>}/>
+                <Route path='/' exact 
+                element={
+                    <Home name={nms} active={false}>
+                        <Sub/>
+                        <Sub/>
+                    </Home>
+                }/>
 
                 <Route path="*" element={<Navigate to="/" replace={true} />}/>
             </Routes>
