@@ -51,6 +51,6 @@ export default function Main (props){
 
                 <Route path="*" element={<Navigate to="/" replace={true} />}/>
             </Routes>
-        </div>
+        </div> 
     );
 }
