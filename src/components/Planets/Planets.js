@@ -6,24 +6,26 @@ import './planets.css';
 export default function Planets(props) {
   // state inside Planets, shared to Planet via props
   // second approach
-  const [list, setList] = useState([]);
+    const [list, setList] = useState([]);
+    let {keyword} = props;
 
-  useEffect(()=>{
-    try{
-        (async function () {
-            let resp = await fetch('https://swapi.dev/api/planets');
-            let data = await resp.json();
-            setList(data.results);
-        })();
-    }
-    catch(err){
-        console.log(err);
-    }
-},[]);
+    useEffect(()=>{
+        try{
+            (async function () {
+                let resp = await fetch(`https://swapi.dev/api/planets?search=${keyword}`);
+                let data = await resp.json();
+                setList(data.results);
+                console.log("planet sfetch", keyword)
+            })();
+        }
+        catch(err){
+            console.log(err);
+        }
+    },[keyword]);
 
-function findPlanet(id) {
-    return list.find((item, index) => parseInt(id) === index + 1);
-}
+    function findPlanet(id) {
+        return list.find((item, index) => parseInt(id) === index + 1);
+    }
 
   return (
     <>

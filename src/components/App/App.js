@@ -2,24 +2,36 @@ import './App.css';
 import Header from '../Header/Header';
 import SearchBar from '../SearchBar/SearchBar';
 import Main from '../Main/Main';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import {useLocation} from 'react-router-dom';
 
 export default function App() {
     const name = 'Company Name';
-    const [terms, setTerms] = useState([]);
+    const {pathname} = useLocation();
+    const [page, setPage] = useState(pathname);
+    const [keyword, setKeyword] = useState("");
 
-    function addTerm (term){
-        let newTerms = new Set ([term, ...terms]);
-        setTerms(Array.from(newTerms));
+    function saveSearch (term) {
+        setKeyword(term);
     }
 
-    return (
+    useEffect(()=>{
+        //see if /planets => /films change keyword
+        //if /planets => /planets/5 DO NOT change
+        let newPath = pathname.split("/")[1]; //[0] would be empty
+        let oldPath = page.split("/")[1];
+        if(newPath !== oldPath){
+            setPage(pathname);
+            setKeyword("");
+        }
+    },[pathname]);
 
+    return (
         <div className='App'>
             <Header company={name} />
-            <SearchBar term={terms[0]} addTerm={addTerm} />
+            <SearchBar keyword={keyword} saveSearch={saveSearch} />
             <main className='content'>
-                <Main/>
+                <Main keyword={keyword}/>
             </main>
         </div>
     );

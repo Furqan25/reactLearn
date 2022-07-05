@@ -5,11 +5,11 @@ import "./films.css";
 
 export default function Films (props){
     const [list,setList] = useState([]);
-
+    let {keyword} = props;
     useEffect(()=>{
         try{
             (async function () {
-                let resp = await fetch('https://swapi.dev/api/films');
+                let resp = await fetch(`https://swapi.dev/api/films?search=${keyword}`);
                 let data = await resp.json();
                 setList(data.results);
             })();
@@ -17,7 +17,7 @@ export default function Films (props){
         catch(err){
             console.log(err);
         }
-    },[]);
+    },[keyword]);
 
     function findFilm(id) {
         return list.find((item, index) => parseInt(id) === index + 1);

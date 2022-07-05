@@ -9,16 +9,17 @@ import Sub from '../Sub/Sub';
 import { useState, useEffect } from 'react';
 
 export default function Main (props){
-    const {pathname} = useLocation();
-    const [people,setPeople] = useState([]);
+    let {keyword} = props;
     let name = ["Kylo","Rey"];
     let nms = Array.isArray(name) ? name.join(" and ") : name;
+    const {pathname} = useLocation();
+    const [people,setPeople] = useState([]);
 
     useEffect(()=>{
         try{
             (async function () {
-                if(pathname.indexOf('/people') > -1){
-                    let resp = await fetch('https://swapi.dev/api/people');
+                if(pathname.indexOf('/people') > -1){ //never gets unmounted so must check if current path is /people
+                    let resp = await fetch(`https://swapi.dev/api/people?search=${keyword}`);
                     let data = await resp.json();
                     console.log("Fetched the people. Updating the state");
                     setPeople(data.results);
@@ -28,18 +29,18 @@ export default function Main (props){
         catch (err){
             console.log(err);
         }
-    },[pathname]);
+    },[pathname, keyword]);
     
     return (
         <div className='mainContent'>
             <Routes>
-                <Route path="/films/*" element={<Films/>}/>
+                <Route path="/films/*" element={<Films keyword={keyword}/>}/>
 
                 <Route path="/people/*" element={<People list={people}/>}>
                     <Route path=":id" element={<Person list={people}/>}/>
                 </Route>
                     
-                <Route path="/planets/*" element={<Planets/>}/>                
+                <Route path="/planets/*" element={<Planets keyword={keyword}/>}/>                
 
                 <Route path='/' exact 
                 element={
